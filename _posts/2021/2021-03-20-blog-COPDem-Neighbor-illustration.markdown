@@ -114,4 +114,13 @@ This article illustrates some of the DEM neighborhood indices introduced in the 
   <a href="../../images/geomorph_copdem_x04y07_0_v01-90m-grass-9x9.jpg"><img src="../../images/geomorph_copdem_x04y07_0_v01-90m-grass-9x9.jpg" alt="image"></a>
 
 	<figcaption>Geomorphon classes derived from GRASS module r.geomorphon; top row image from a 3x3 kernel and the original DEM, lower left image from a 5x5 kernel applied after filtering the DEM with an averaging 3x3 kernel, lower right image from a 9x9 kernel applied to an unfiltered DEM.</figcaption>
+
+  <figure class="half">
+  	<a href="../../images/landform-ps_copdem_x04y07_0_v01-90m-grass-3x3.jpg"><img src="../../images/landform-ps_copdem_x04y07_0_v01-90m-grass-3x3.jpg" alt="image"></a>
+
+    <a href="../../images/landform-ps_copdem_x04y07_0_v01-90m-grass-9x9.jpg"><img src="../../images/landform-ps_copdem_x04y07_0_v01-90m-grass-9x9.jpg" alt="image not yet ready"></a>
+
+  	<figcaption>Morphology classes derived from the GRASS module r.param.scale; left image from a 3x3 kernel, right image from a 9x9 kernel.</figcaption>
+  </figure>
+
 </figure>
