@@ -99,8 +99,6 @@ the active antenna has also led to an enhanced passive product at 9 km. Combined
 
 Kartturs GeoImagine Framework includes a package for specific SMAP processing: <span class='package'>[geoimagine-smap](https://github.com/karttur/geoimagine-smap/)</span>. The package is mainly a translator redirecting specific smap processes.
 
-
-
 ## Project module
 
 The project module file (<span class='file'>projSMAP.py</span>) is available in the <span class='package'>Project</span> package [projects](https://github.com/karttur/geoimagine-projects/).
