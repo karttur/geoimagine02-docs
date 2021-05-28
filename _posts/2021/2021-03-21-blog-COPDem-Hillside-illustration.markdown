@@ -1,9 +1,9 @@
 ---
 layout: post
-title: DEM neighbourhood analysis - illustrations
+title: DEM hill side inidices - illustrations
 categories: blog
 datasource: dem
-excerpt: "Illustration of DEM measures and indexes from kernel neighbourhood analysis"
+excerpt: "Illustration of DEM measures and indices representing the scale of the stream and its valley"
 tags:
   - Copernicus DEM
   - hillside
@@ -29,11 +29,11 @@ This article illustrates some of the DEM hill side indices introduced in the [pr
 </figure>
 
 <figure class="half">
-	<a href="../../images/stream-dist_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/stream-dist_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90mjpg" alt="image"></a>
+	<a href="../../images/stream-dist_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/stream-dist_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
 
   <a href="../../images/hydraulhead_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/hydraulhead_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
 
-	<figcaption>Streams and distances to draining stream along the hillside flow route (left panel) and elevation difference difference between land surface and drainage point (hydraulic head).</figcaption>
+	<figcaption>Streams and distances to draining stream along the hillside flow route (left panel) and elevation difference between land surface and drainage point (hydraulic head).</figcaption>
 </figure>
 
 <figure class="half">
@@ -57,7 +57,7 @@ This article illustrates some of the DEM hill side indices introduced in the [pr
 <figure class="half">
 	<a href="../../images/rusle-slopelength_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/rusle-slopelength_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
 
-  <a href="../../rusle-slopesteepness_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/crosc_copdem_x04y07_0_v01-90m-grass-9x9.jpg" alt="image"></a>
+  <a href="../../images/rusle-slopesteepness_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/rusle-slopesteepness_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
 
 	<figcaption>Revised Universal Soil Loss Equation (RUSLE) hillside indexes for, left: slope length, and right: slopre steepness.</figcaption>
 </figure>
