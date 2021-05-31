@@ -63,17 +63,17 @@ This article illustrates some of the DEM hill side indices introduced in the [pr
 </figure>
 
 <figure class="half">
-	<a href="../../images/sfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/sfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
+	<a href="../../images/sfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png"><img src="../../images/sfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png" alt="image"></a>
 
-  <a href="../../images/mfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/mfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
+  <a href="../../images/mfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png"><img src="../../images/mfd-updrain_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png" alt="image"></a>
 
 	<figcaption>Upstream drainage areas, left: from single flow direction (SFD) analysis, and right: Multiple Flow Direction (MFD) analysis. The scaling is the same for both images and represent the natural logarithm of the total upstream area of each cell. </figcaption>
 </figure>
 
 <figure class="half">
-	<a href="../../images/tci_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/tci_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
+	<a href="../../images/tci_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png"><img src="../../images/tci_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png" alt="image"></a>
 
-  <a href="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg"><img src="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.jpg" alt="image"></a>
+  <a href="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png"><img src="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png" alt="image"></a>
 
 	<figcaption>Wetlness and steam power index; left: Topographci Convergence Index (TCI) also labeles Topographic Wetniess Index (TWI), and right: Stream Power Index (SPI).</figcaption>
 </figure>
