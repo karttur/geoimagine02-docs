@@ -1,6 +1,6 @@
 ---
 layout: post
-title: DEM hill side inidices - illustrations
+title: DEM hill side indices - illustrations
 categories: blog
 datasource: dem
 excerpt: "Illustration of DEM measures and indices representing the scale of the stream and its valley"

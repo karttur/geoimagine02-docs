@@ -1,6 +1,6 @@
 ---
 layout: post
-title: DEM processing 10: Extracting kernel indexes with GDAL
+title: "DEM processing 10: Extracting kernel indexes with GDAL"
 categories: blog
 datasource: dem
 biophysical: elevation
