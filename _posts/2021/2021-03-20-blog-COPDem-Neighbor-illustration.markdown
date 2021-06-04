@@ -40,9 +40,9 @@ This article illustrates some of the DEM neighborhood indices introduced in the 
 </figure>
 
 <figure class="half">
-	<a href="../../images/slope3_copdem_x04y07_0_v01-90m-grass-3x3.jpg"><img src="../../images/slope_copdem_x04y07_0_v01-90m-grass-3x3.jpg" alt="image"></a>
+	<a href="../../images/slope3_copdem_x04y07_0_v01-90m-grass-3x3.jpg"><img src="../../images/slope3_copdem_x04y07_0_v01-90m-grass-3x3.jpg" alt="image"></a>
 
-  <a href="../../images/slope3_copdem_x04y07_0_v01-90m-grass-9x9.jpg"><img src="../../images/slope_copdem_x04y07_0_v01-90m-grass-9x9.jpg" alt="image"></a>
+  <a href="../../images/slope3_copdem_x04y07_0_v01-90m-grass-9x9.jpg"><img src="../../images/slope3_copdem_x04y07_0_v01-90m-grass-9x9.jpg" alt="image"></a>
 
 	<figcaption>Slope steepness derived from Karttur's GeoImagine Framework (numpy and scipy); left image from a 3x3 kernel, right image from a 9x9 kernel.</figcaption>
 </figure>
