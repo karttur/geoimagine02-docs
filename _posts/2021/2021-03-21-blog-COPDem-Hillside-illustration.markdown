@@ -73,7 +73,7 @@ This article illustrates some of the DEM hill side indices introduced in the [pr
 <figure class="half">
 	<a href="../../images/tci_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png"><img src="../../images/tci_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png" alt="image"></a>
 
-  <a href="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png"><img src="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png" alt="image"></a>
+  <a href="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png"><img src="../../images/psi_copdem_x04y07_0_v01-pfpf-hydrdem4+4-90m.png " alt="image"></a>
 
 	<figcaption>Wetlness and steam power index; left: Topographci Convergence Index (TCI) also labeles Topographic Wetniess Index (TWI), and right: Stream Power Index (SPI).</figcaption>
 </figure>

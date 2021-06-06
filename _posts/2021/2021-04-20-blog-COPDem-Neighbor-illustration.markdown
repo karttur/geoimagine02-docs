@@ -30,7 +30,6 @@ share: true
 This article illustrates some of the DEM neighborhood indices introduced in the [previous](../blog-COPDemTileProcess) post.
 
 
-
 <figure class="half">
 	<a href="../../images/dem3_copdem_x04y07_0_v01-90m.jpg"><img src="../../images/dem3_copdem_x04y07_0_v01-90m.jpg" alt="image"></a>
 
