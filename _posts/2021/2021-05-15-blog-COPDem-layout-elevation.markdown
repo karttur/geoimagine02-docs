@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Image map layout
+title: DEM image layout
 categories: blog
 datasource: dem
-excerpt: "Elevation sybolisation; color ramping, hill shading and legends for image maps"
+excerpt: "Elevation symbolisation; color ramping, hill shading and legends for image maps"
 tags:
   - DEM
   - map
