@@ -20,7 +20,7 @@ share: true
 
 ## Introduction
 
-Karttur's GeoImagine Framework is a system for processing Big Spatial Data. It is not easy to setup and learn, but once you have it running it is more versatile than other systems. This post links to all the steps required for setting up the Framework in Macos.
+Karttur's GeoImagine Framework is a system for processing Big Spatial Data. It is not easy to setup and learn, but once you have it running it is more versatile than other systems. This post links to all the steps required for setting up the Framework in MacOS.
 
 ## Basic tools
 
@@ -32,7 +32,7 @@ My very first blog and its sole post - [Set up blog tools: Atom, Homebrew and Je
 
 ## Image and video editing tools
 
-Some parts of Framework make use of command line image and video editing tools - e.g. for producing maps and animations. The two tools are both installed using [Homebrew](https://brew.sh), as outlined in detailed in the two blog posts on [ImageMagick](https://karttur.github.io/setup-theme-blog/blog/install-imagemagick/) and [Create FFmpeg movie](https://karttur.github.io/setup-theme-blog/blog/ffmpeg-movie/).
+Some parts of Framework make use of command line image and video editing tools - e.g. for producing maps and animations. The two tools are both installed using [Homebrew](https://brew.sh), as outlined in detail in the two blog posts on [ImageMagick](https://karttur.github.io/setup-theme-blog/blog/install-imagemagick/) and [Create FFmpeg movie](https://karttur.github.io/setup-theme-blog/blog/ffmpeg-movie/).
 
 ## Spatial Data Integrated Development Environment (SPIDE)
 
@@ -46,6 +46,6 @@ Here are the links to the core posts on MacOS setup in the blog:
 - [Install postgreSQL and postGIS](https://karttur.github.io/setup-ide/setup-ide/install-postgres/)
 - [Conda virtual environments I](https://karttur.github.io/setup-ide/setup-ide/conda-environ/)
 
-The complete setup in Linux is summarised in a signel post: [SPIDE for Ubuntu 20](https://karttur.github.io/setup-ide/blog/ubuntu20-setup-spide/).
+The complete setup in Linux is summarised in a singel post: [SPIDE for Ubuntu 20](https://karttur.github.io/setup-ide/blog/ubuntu20-setup-spide/).
 
 The blog [Install and setup SPIDE](https://karttur.github.io/setup-ide/) also contains some more details on various problems and options for the setup.
