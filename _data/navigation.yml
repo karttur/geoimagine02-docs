@@ -8,6 +8,10 @@
   url: /
   include: 'N'
 
+- title: Setup
+  url: /setup/
+  include: 'N'
+
 - title: Concept
   url: /concept/
   include: 'N'

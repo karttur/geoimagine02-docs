@@ -8,8 +8,8 @@ excerpt: "Introduction and access to global Digital Elevation Models (DEMs)"
 tags:
   - DEM
 image: avg-trmm-3b43v7-precip_3B43_trmm_2001-2016_A
-date: '2021-03-12 T18:17:25.000Z'
-modified: '2021-03-12 T18:17:25.000Z'
+date: '2021-03-02 T18:17:25.000Z'
+modified: '2021-03-02 T18:17:25.000Z'
 comments: true
 share: true
 ---

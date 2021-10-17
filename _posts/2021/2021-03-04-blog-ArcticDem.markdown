@@ -9,8 +9,8 @@ tags:
   - DEM
   - Acrtic DEM
 image: avg-trmm-3b43v7-precip_3B43_trmm_2001-2016_A
-date: '2021-03-14 T18:17:25.000Z'
-modified: '2021-03-14 T18:17:25.000Z'
+date: '2021-03-04 T18:17:25.000Z'
+modified: '2021-03-04 T18:17:25.000Z'
 comments: true
 share: true
 fig1: arcticdem_polar-stereographic

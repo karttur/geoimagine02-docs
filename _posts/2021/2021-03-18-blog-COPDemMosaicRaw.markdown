@@ -3,6 +3,7 @@ layout: post
 title: Mosaic, import and tile CopDEM
 categories: blog
 datasource: dem
+thematic: copdem
 excerpt: "Mosaic Copernicus DEM to a virtual dataset and then import and tile the virtual dataset"
 tags:
   - Copernicus DEM

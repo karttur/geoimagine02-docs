@@ -8,8 +8,8 @@ excerpt: "Complete process chain for Copernicus DEM using Kartturs GeoImagine Fr
 tags:
   - DEM
 image: avg-trmm-3b43v7-precip_3B43_trmm_2001-2016_A
-date: '2021-05-14 T18:17:25.000Z'
-modified: '2021-05-14 T18:17:25.000Z'
+date: '2021-03-10 T18:17:25.000Z'
+modified: '2021-03-10 T18:17:25.000Z'
 comments: true
 share: true
 figure1: soil-moisture-avg_SPL3SMP_global_2015-2018@D001_005
@@ -19,7 +19,7 @@ figure1: soil-moisture-avg_SPL3SMP_global_2015-2018@D001_005
 
 ## Introduction
 
-Processing a global DEM all the way form downloading tiles to create coherent indices and metrics of landscapes, is a typical task for which Karttur's GeoImagine Framework was built. Once the DEM is imported and organized within the Framework, it is easy to test different algorithms and visualizations for DEM. If you have access to some ground data you can also apply the Framework for comparing the results of different algorithms and parameters against ground data, and thus select the most appropriate landscape model.
+Processing a global DEM all the way from downloading tiles to create coherent indices and metrics of landscapes, is a typical task for which Karttur's GeoImagine Framework was built. Once the DEM is imported and organized within the Framework, it is easy to test different algorithms and visualizations for DEM. If you have access to some ground data you can also apply the Framework for comparing the results of different algorithms and parameters against ground data, and thus select the most appropriate landscape model.
 
 ## Prerequisits
 
@@ -35,7 +35,7 @@ Before running the DEM processing you need to decide how you want to manage hydr
 
 ## Process chain
 
-The process chain is available at [Kartturs GitHub account]() and also found under the <span class= 'button'>Hide/show</span> button below. The process chain is an ordinary text file linking to a series of <span class='file'>json</span> files. Empty rows and rows starting with a "#" are ignored. When called from karttur's GeoImagine Framework, the processes of each json file are sequentially run. The structure of the json files and the commands are summarised in the post [#]#().
+The process chain is available at [Kartturs GitHub account]() and also found under the <span class= 'button'>Hide/show</span> button below. The process chain is an ordinary text file linking to a series of <span class='file'>json</span> files. Empty rows and rows starting with a "#" are ignored. When called from karttur's GeoImagine Framework, the processes of each json file are sequentially run. The structure of the json files and the commands are summarised in the post [_Not yet done_]#().
 
 <button id= "toggleprocesschain" onclick="hiddencode('processchain')">Hide/Show Process chain</button>
 
@@ -59,9 +59,9 @@ The process chain is available at [Kartturs GitHub account]() and also found und
 
 ## json/0002_AddRasterPalette_DEM_v090.json
 
-## json/0003_createlegends_DEM_v090.json
+## json/0003_createlegends.json
 
-## json/0005_exportlegend_DEM_v090.json
+## json/0005_exportlegend_CopDEM.json
 
 ###################################
 ###     Search and download     ###
@@ -238,9 +238,7 @@ json/0950_duplicate_CopDEM_v090.json
 
 ### Layout
 
-To produce symbolised and labeled map using the Framework, you have to define some _Layout_ features and parameters. All map layout is done using unsigned byte range maps with values ranging from 1 to 255, Where values 251 to 255 are reserved for specific purposes and not allowed for representing map values. To produce a symbolised map using the Framework you need to define the _scaling_ and the _palette_.
-
-Layout processes include:
+To produce symbolised and labeled maps using the Framework, you have to define some Layout features and parameters. All map layout is done using unsigned byte range maps with values ranging from 1 to 255, Where values 251 to 255 are reserved for specific purposes and not allowed for representing map values. Layout processes include:
 
 - CreateScaling,
 - AddRasterPalette,
@@ -253,7 +251,7 @@ Layout processes include:
 json/0001_CreatesScaling_DEM_v090.json
 ```
 
-The _CreateScaling_ process converts any input raster into an unsigned byte (0-255) range file. The byte file is then used for assigning a color ramp (defined by the process _AddRasterPalette_, see next section).
+The _CreateScaling_ process converts any input raster into an unsigned byte (0-255) range file. The byte file is then used for assigning a color ramp (defined in the process _AddRasterPalette_, see next section).
 
 Scaling is thus not defined on the fly, instead each map composition (see the post on ??? for an explanation on the Framework map composition concept) must be associated with a predefined scaling. Once defined, this scaling can not be changed.
 
@@ -280,9 +278,9 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
   "process": [
     {
       "processid": "CreateScaling",
-      "overwrite": false,
+      "overwrite": true,
       "parameters": {
-        "scalefac": 0.03125,
+        "scalefac": 0.04,
         "mirror0": false
       },
       "comp": [
@@ -299,26 +297,7 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
     },
     {
       "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 1,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "dem": {
-            "source": "*",
-            "product": "*",
-            "content": "dem",
-            "layerid": "dem1",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
+      "overwrite": true,
       "parameters": {
         "scalefac": 4,
         "mirror0": false
@@ -337,7 +316,7 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
     },
     {
       "processid": "CreateScaling",
-      "overwrite": false,
+      "overwrite": true,
       "parameters": {
         "scalefac": 1,
         "mirror0": true
@@ -358,8 +337,8 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
       "processid": "CreateScaling",
       "overwrite": true,
       "parameters": {
-        "scalefac": 5,
-        "mirror0": true
+        "scalefac": 1,
+        "mirror0": false
       },
       "comp": [
         {
@@ -370,17 +349,7 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
             "layerid": "tpi",
             "suffix": "*"
           }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": true,
-      "parameters": {
-        "scalefac": 5,
-        "mirror0": false
-      },
-      "comp": [
+        },
         {
           "tri": {
             "source": "*",
@@ -394,9 +363,9 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
     },
     {
       "processid": "CreateScaling",
-      "overwrite": false,
+      "overwrite": true,
       "parameters": {
-        "scalefac": 50000,
+        "scalefac": 25000,
         "mirror0": true
       },
       "comp": [
@@ -431,7 +400,7 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
     },
     {
       "processid": "CreateScaling",
-      "overwrite": false,
+      "overwrite": true,
       "parameters": {
         "scalefac": 1000,
         "mirror0": true
@@ -450,277 +419,7 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
     },
     {
       "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 25,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "rusle-slopelength": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "rusle-slopelength",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 50,
-        "offsetadd": -2,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "rusle-slopesteepness": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "rusle-slopesteepness",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 2,
-        "offsetadd": 25,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "near-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-head",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 2,
-        "offsetadd": 25,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "far-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "far-divide-head",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 2,
-        "offsetadd": 25,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "near-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-head",
-            "suffix": "*"
-          },
-          "far-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "far-divide-head",
-            "suffix": "*"
-          },
-          "hydraulhead": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "hydraulhead",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 0.05555,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "stream-dist": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "stream-dist",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 0.1111,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "near-divide-dist": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-dist",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 0.01111,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "far-divide-dist": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "far-divide-dist",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 12,
-        "log": true,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "sfd-updrain": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "sfd-updrain",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 12,
-        "log": true,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "mfd-updrain": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "mfd-updrain",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 20,
-        "log": true,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "psi": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "psi",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 20,
-        "log": true,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "spi": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "spi",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
-      "parameters": {
-        "scalefac": 10,
-        "offsetadd": -30,
-        "mirror0": false
-      },
-      "comp": [
-        {
-          "tci": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "tci",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": false,
+      "overwrite": true,
       "parameters": {
         "scalefac": 1,
         "mirror0": false
@@ -736,25 +435,6 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
           }
         },
         {
-          "landform-ps": {
-            "source": "*",
-            "product": "*",
-            "content": "dem",
-            "layerid": "landform-ps",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": true,
-      "parameters": {
-        "scalefac": 10,
-        "mirror0": false
-      },
-      "comp": [
-        {
           "lfgeomrph": {
             "source": "*",
             "product": "*",
@@ -762,17 +442,7 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
             "layerid": "geomorph",
             "suffix": "*"
           }
-        }
-      ]
-    },
-    {
-      "processid": "CreateScaling",
-      "overwrite": true,
-      "parameters": {
-        "scalefac": 10,
-        "mirror0": false
-      },
-      "comp": [
+        },
         {
           "landform-ps": {
             "source": "*",
@@ -786,14 +456,13 @@ Scaling is thus not defined on the fly, instead each map composition (see the po
     }
   ]
 }
-
 ```
 {% endraw %}
 {% endcapture %}
 {% include widgets/toggle-code.html  toggle-text=text-capture  %}
 </div>
 
-#### AddRasterPalette
+#### Palette
 
 ```
 json/0002_AddRasterPalette_DEM_v090.json
@@ -821,242 +490,6 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
     "timestep": "static"
   },
   "process": [
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_dark_auto",
-        "compid": "dem_dark_auto",
-        "setcolor": {
-          "0": {
-            "red": "54",
-            "green": "121",
-            "blue": "36",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "125": {
-            "red": "247",
-            "green": "248",
-            "blue": "80",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "250": {
-            "red": "121",
-            "green": "24",
-            "blue": "21",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "landformTPI",
-        "compid": "dem_landform-TPI",
-        "setcolor": {
-          "5": {
-            "red": "30",
-            "green": "0",
-            "blue": "170",
-            "alpha": "0",
-            "label": "Canyon or valley",
-            "hint": "NA"
-          },
-          "12": {
-            "red": "30",
-            "green": "0",
-            "blue": "170",
-            "alpha": "0",
-            "label": "Canyon or valley",
-            "hint": "Canyon or valley"
-          },
-          "13": {
-            "red": "10",
-            "green": "160",
-            "blue": "10",
-            "alpha": "0",
-            "label": "midslope/shallow valley, hollow",
-            "hint": "NA"
-          },
-          "22": {
-            "red": "10",
-            "green": "160",
-            "blue": "10",
-            "alpha": "0",
-            "label": "midslope/shallow valley, hollow",
-            "hint": "midslope/shallow valley, hollow"
-          },
-          "23": {
-            "red": "25",
-            "green": "155",
-            "blue": "234",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "NA"
-          },
-          "32": {
-            "red": "25",
-            "green": "155",
-            "blue": "234",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "33": {
-            "red": "0",
-            "green": "128",
-            "blue": "128",
-            "alpha": "0",
-            "label": "U-shaped valley or footslope",
-            "hint": "NA"
-          },
-          "42": {
-            "red": "0",
-            "green": "128",
-            "blue": "128",
-            "alpha": "0",
-            "label": "U-shaped valley or footslope",
-            "hint": "U-shaped valley or footslope"
-          },
-          "43": {
-            "red": "220",
-            "green": "235",
-            "blue": "240",
-            "alpha": "0",
-            "label": "plain",
-            "hint": "NA"
-          },
-          "52": {
-            "red": "220",
-            "green": "235",
-            "blue": "240",
-            "alpha": "0",
-            "label": "plain",
-            "hint": "plain or flat"
-          },
-          "53": {
-            "red": "230",
-            "green": "230",
-            "blue": "120",
-            "alpha": "0",
-            "label": "open slope",
-            "hint": "NA"
-          },
-          "62": {
-            "red": "230",
-            "green": "230",
-            "blue": "120",
-            "alpha": "0",
-            "label": "open slope",
-            "hint": "open slope"
-          },
-          "63": {
-            "red": "235",
-            "green": "205",
-            "blue": "15",
-            "alpha": "0",
-            "label": "upper slope",
-            "hint": "NA"
-          },
-          "72": {
-            "red": "235",
-            "green": "205",
-            "blue": "15",
-            "alpha": "0",
-            "label": "upper slope",
-            "hint": "mesa, upper slope, shoulder, ridge"
-          },
-          "73": {
-            "red": "255",
-            "green": "128",
-            "blue": "10",
-            "alpha": "0",
-            "label": "local ridge",
-            "hint": "NA"
-          },
-          "82": {
-            "red": "255",
-            "green": "128",
-            "blue": "10",
-            "alpha": "0",
-            "label": "local ridge",
-            "hint": "lodal ridge"
-          },
-          "83": {
-            "red": "224",
-            "green": "80",
-            "blue": "80",
-            "alpha": "0",
-            "label": "midslope ridge or spur",
-            "hint": "NA"
-          },
-          "92": {
-            "red": "224",
-            "green": "80",
-            "blue": "80",
-            "alpha": "0",
-            "label": "midslope ridge or spur",
-            "hint": "midslope ridge or spur"
-          },
-          "93": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak",
-            "hint": "NA"
-          },
-          "102": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak",
-            "hint": "peak or summit"
-          },
-          "107": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak",
-            "hint": "NA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "255",
-            "label": "255",
-            "hint": "no data"
-          }
-        }
-      }
-    },
     {
       "processid": "AddRasterPalette",
       "overwrite": true,
@@ -1228,1581 +661,15 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
         "setcolor": {
           "0": {
             "red": "0",
-            "green": "92",
-            "blue": "128",
-            "alpha": "0",
-            "label": "0",
-            "hint": "slope = 0 (flat)"
-          },
-          "4": {
-            "red": "0",
-            "green": "128",
-            "blue": "64",
-            "alpha": "0",
-            "label": "1.0",
-            "hint": "NA"
-          },
-          "40": {
-            "red": "220",
-            "green": "240",
-            "blue": "16",
-            "alpha": "0",
-            "label": "10",
-            "hint": "slope = 10"
-          },
-          "80": {
-            "red": "255",
-            "green": "146",
-            "blue": "18",
-            "alpha": "0",
-            "label": "30",
-            "hint": "slope = 30"
-          },
-          "160": {
-            "red": "192",
-            "green": "46",
-            "blue": "0",
-            "alpha": "0",
-            "label": "50",
-            "hint": "slope = 50"
-          },
-          "250": {
-            "red": "128",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "> 60",
-            "hint": "slope > 60"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "slope2",
-        "compid": "dem_slope2",
-        "setcolor": {
-          "0": {
-            "red": "143",
-            "green": "152",
-            "blue": "18",
-            "alpha": "0",
-            "label": "0",
-            "hint": "slope = 0 (flat)"
-          },
-          "4": {
-            "red": "150",
-            "green": "160",
-            "blue": "33",
-            "alpha": "0",
-            "label": "1.0",
-            "hint": "NA"
-          },
-          "40": {
-            "red": "225",
-            "green": "240",
-            "blue": "51",
-            "alpha": "0",
-            "label": "10",
-            "hint": "slope = 10"
-          },
-          "80": {
-            "red": "255",
-            "green": "200",
-            "blue": "10",
-            "alpha": "0",
-            "label": "20",
-            "hint": "slope = 20"
-          },
-          "120": {
-            "red": "250",
-            "green": "160",
-            "blue": "40",
-            "alpha": "0",
-            "label": "30",
-            "hint": "slope = 30"
-          },
-          "160": {
-            "red": "245",
-            "green": "100",
-            "blue": "20",
-            "alpha": "0",
-            "label": "40",
-            "hint": "slope = 40"
-          },
-          "200": {
-            "red": "205",
-            "green": "70",
-            "blue": "120",
-            "alpha": "0",
-            "label": "50",
-            "hint": "slope = 50"
-          },
-          "250": {
-            "red": "179",
-            "green": "107",
-            "blue": "209",
-            "alpha": "0",
-            "label": "> 60",
-            "hint": "slope > 60"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "slope3",
-        "compid": "dem_slope3",
-        "setcolor": {
-          "0": {
-            "red": "135",
-            "green": "160",
-            "blue": "212",
-            "alpha": "0",
-            "label": "0",
-            "hint": "slope = 0 (flat)"
-          },
-          "4": {
-            "red": "168",
-            "green": "179",
-            "blue": "149",
-            "alpha": "0",
-            "label": "1.0",
-            "hint": "NA"
-          },
-          "40": {
-            "red": "213",
-            "green": "222",
-            "blue": "115",
-            "alpha": "0",
-            "label": "10",
-            "hint": "slope = 10"
-          },
-          "80": {
-            "red": "253",
-            "green": "253",
-            "blue": "155",
-            "alpha": "0",
-            "label": "20",
-            "hint": "slope = 20"
-          },
-          "120": {
-            "red": "239",
-            "green": "184",
-            "blue": "12",
-            "alpha": "0",
-            "label": "30",
-            "hint": "slope = 30"
-          },
-          "160": {
-            "red": "223",
-            "green": "144",
-            "blue": "88",
-            "alpha": "0",
-            "label": "40",
-            "hint": "slope = 40"
-          },
-          "200": {
-            "red": "233",
-            "green": "129",
-            "blue": "189",
-            "alpha": "0",
-            "label": "50",
-            "hint": "slope = 50"
-          },
-          "250": {
-            "red": "216",
-            "green": "153",
-            "blue": "243",
-            "alpha": "0",
-            "label": "> 60",
-            "hint": "slope > 60"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "peakproximity",
-        "compid": "terrain_peakproximity",
-        "setcolor": {
-          "0": {
-            "red": "128",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slopee"
-          },
-          "5": {
-            "red": "225",
-            "green": "175",
-            "blue": "0",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slope"
-          },
-          "50": {
-            "red": "175",
-            "green": "225",
-            "blue": "0",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slope"
-          },
-          "150": {
-            "red": "0",
-            "green": "125",
-            "blue": "125",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slope"
-          },
-          "250": {
-            "red": "0",
             "green": "0",
             "blue": "128",
             "alpha": "0",
             "label": "flat",
             "hint": "flat"
           },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "generalproximity",
-        "compid": "any_proximity",
-        "setcolor": {
-          "0": {
-            "red": "252",
-            "green": "246",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0",
-            "hint": "0 (no distance)"
-          },
-          "28": {
-            "red": "127",
-            "green": "207",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0.5",
-            "hint": "distance = 0.5 km"
-          },
-          "56": {
-            "red": "127",
-            "green": "207",
-            "blue": "220",
-            "alpha": "0",
-            "label": "1.0",
-            "hint": "distance = 1.0 km"
-          },
-          "224": {
-            "red": "151",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "4.0",
-            "hint": "distance = 4.0 km"
-          },
-          "249": {
-            "red": "151",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "4.5",
-            "hint": "NA"
-          },
-          "250": {
-            "red": "151",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "> 4.5",
-            "hint": "distance > 4.5 km"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "near-divide-dist",
-        "compid": "terrain_near-divide-dist",
-        "setcolor": {
-          "0": {
-            "red": "252",
-            "green": "246",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0",
-            "hint": "0 (no distance)"
-          },
-          "25": {
-            "red": "127",
-            "green": "207",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0.25",
-            "hint": "distance = 0.25 km"
-          },
-          "50": {
-            "red": "127",
-            "green": "207",
-            "blue": "220",
-            "alpha": "0",
-            "label": "0.5",
-            "hint": "distance = 0.5 km"
-          },
-          "100": {
-            "red": "135",
-            "green": "110",
-            "blue": "250",
-            "alpha": "0",
-            "label": "1.0",
-            "hint": "distance = 1.0 km"
-          },
-          "200": {
-            "red": "135",
-            "green": "10",
-            "blue": "210",
-            "alpha": "0",
-            "label": "2.0",
-            "hint": "distance = 2.0 km"
-          },
-          "249": {
-            "red": "160",
-            "green": "10",
-            "blue": "160",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "NA"
-          },
-          "250": {
-            "red": "121",
-            "green": "5",
-            "blue": "121",
-            "alpha": "0",
-            "label": "> 2.5",
-            "hint": "distance > 2.5 km"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "far-divide-dist",
-        "compid": "terrain_far-divide-dist",
-        "setcolor": {
-          "0": {
-            "red": "252",
-            "green": "246",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0",
-            "hint": "0 (no distance)"
-          },
-          "25": {
-            "red": "127",
-            "green": "207",
-            "blue": "120",
-            "alpha": "0",
-            "label": "2.5",
-            "hint": "distance = 2.5 km"
-          },
-          "50": {
-            "red": "127",
-            "green": "207",
-            "blue": "220",
-            "alpha": "0",
-            "label": "5.0",
-            "hint": "distance = 5.0 km"
-          },
-          "100": {
-            "red": "135",
-            "green": "110",
-            "blue": "250",
-            "alpha": "0",
-            "label": "10",
-            "hint": "distance = 10 km"
-          },
-          "200": {
-            "red": "135",
-            "green": "10",
-            "blue": "210",
-            "alpha": "0",
-            "label": "20",
-            "hint": "distance = 20 km"
-          },
-          "249": {
-            "red": "160",
-            "green": "10",
-            "blue": "160",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "NA"
-          },
-          "250": {
-            "red": "121",
-            "green": "5",
-            "blue": "121",
-            "alpha": "0",
-            "label": "> 25",
-            "hint": "distance > 25 km"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "generalproximity",
-        "compid": "any_proximity",
-        "setcolor": {
-          "0": {
-            "red": "252",
-            "green": "246",
-            "blue": "120",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "0 (no distance)"
-          },
-          "28": {
-            "red": "127",
-            "green": "207",
-            "blue": "120",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "distance = 0.5 km"
-          },
-          "56": {
-            "red": "127",
-            "green": "207",
-            "blue": "220",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "distance = 1.0 km"
-          },
-          "224": {
-            "red": "151",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "distance = 4.0 km"
-          },
-          "249": {
-            "red": "151",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "NA"
-          },
-          "250": {
-            "red": "151",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "distance > 4.5 km"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "invgeneralproximity",
-        "compid": "invany_proximity",
-        "setcolor": {
-          "0": {
-            "red": "151",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "0",
-            "hint": "no distance"
-          },
-          "1": {
-            "red": "127",
-            "green": "207",
-            "blue": "237",
-            "alpha": "0",
-            "label": "50",
-            "hint": "NA"
-          },
-          "55": {
-            "red": "127",
-            "green": "207",
-            "blue": "179",
-            "alpha": "0",
-            "label": "1",
-            "hint": "distance = 1 km"
-          },
-          "111": {
-            "red": "127",
-            "green": "207",
-            "blue": "120",
-            "alpha": "0",
-            "label": "2",
-            "hint": "distance = 2 km"
-          },
-          "222": {
-            "red": "228",
-            "green": "240",
-            "blue": "120",
-            "alpha": "0",
-            "label": "4",
-            "hint": "distance = 4 km"
-          },
-          "249": {
-            "red": "252",
-            "green": "246",
-            "blue": "120",
-            "alpha": "0",
-            "label": "4.5",
-            "hint": "NA"
-          },
-          "250": {
-            "red": "252",
-            "green": "246",
-            "blue": "10",
-            "alpha": "0",
-            "label": "> 4.5",
-            "hint": "distance > 4.5 km"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "streamproximity",
-        "compid": "terrain_streamproximity",
-        "setcolor": {
-          "0": {
-            "red": "121",
-            "green": "10",
-            "blue": "155",
-            "alpha": "0",
-            "label": "0",
-            "hint": "proximity = 0"
-          },
-          "1": {
-            "red": "127",
-            "green": "107",
-            "blue": "205",
-            "alpha": "0",
-            "label": "0",
-            "hint": "NA"
-          },
-          "50": {
-            "red": "127",
-            "green": "207",
-            "blue": "180",
-            "alpha": "0",
-            "label": "0.9",
-            "hint": "distance = 900 m"
-          },
-          "100": {
-            "red": "75",
-            "green": "225",
-            "blue": "130",
-            "alpha": "0",
-            "label": "1.8",
-            "hint": "distance = 1.8 km"
-          },
-          "150": {
-            "red": "150",
-            "green": "225",
-            "blue": "100",
-            "alpha": "0",
-            "label": "2.7",
-            "hint": "distance = 2.7 km"
-          },
-          "200": {
-            "red": "235",
-            "green": "240",
-            "blue": "60",
-            "alpha": "0",
-            "label": "3.6",
-            "hint": "distance = 3.6 km"
-          },
-          "249": {
-            "red": "252",
-            "green": "130",
-            "blue": "10",
-            "alpha": "0",
-            "label": "4.0",
-            "hint": "NA"
-          },
-          "250": {
-            "red": "190",
-            "green": "100",
-            "blue": "10",
-            "alpha": "0",
-            "label": "> 4.5",
-            "hint": "distance > 4.5 km"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "hydraulhead",
-        "compid": "terrain_hydraulhead",
-        "setcolor": {
-          "0": {
-            "red": "128",
-            "green": "0",
-            "blue": "128",
-            "alpha": "0",
-            "label": "-10",
-            "hint": "-10 m (cell below draining stream)"
-          },
-          "24": {
-            "red": "64",
-            "green": "0",
-            "blue": "150",
-            "alpha": "0",
-            "label": "-1",
-            "hint": "NA"
-          },
-          "25": {
-            "red": "0",
-            "green": "0",
-            "blue": "187",
-            "alpha": "0",
-            "label": "0",
-            "hint": "draining stream or water body"
-          },
-          "26": {
-            "red": "0",
-            "green": "128",
-            "blue": "187",
-            "alpha": "0",
-            "label": "1",
-            "hint": "NA"
-          },
-          "45": {
-            "red": "128",
-            "green": "255",
-            "blue": "225",
-            "alpha": "0",
-            "label": "10",
-            "hint": "10 m (above draining stream)"
-          },
-          "75": {
-            "red": "164",
-            "green": "240",
-            "blue": "64",
-            "alpha": "0",
-            "label": "25",
-            "hint": "25 m (above draining stream)"
-          },
-          "125": {
-            "red": "248",
-            "green": "238",
-            "blue": "62",
-            "alpha": "0",
-            "label": "50",
-            "hint": "50 m (above draining stream)"
-          },
-          "187": {
-            "red": "255",
-            "green": "180",
-            "blue": "60",
-            "alpha": "0",
-            "label": "75",
-            "hint": "75 m (above draining stream)"
-          },
-          "250": {
-            "red": "255",
-            "green": "200",
-            "blue": "200",
-            "alpha": "0",
-            "label": "> 100",
-            "hint": "more than 100 m above draining stream"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "divideheadold",
-        "compid": "terrain_divideheadold",
-        "setcolor": {
-          "0": {
-            "red": "128",
-            "green": "0",
-            "blue": "128",
-            "alpha": "0",
-            "label": "< -10",
-            "hint": "< -10 m"
-          },
           "5": {
-            "red": "128",
-            "green": "0",
-            "blue": "128",
-            "alpha": "0",
-            "label": "-10",
-            "hint": "NA"
-          },
-          "24": {
-            "red": "64",
-            "green": "0",
-            "blue": "150",
-            "alpha": "0",
-            "label": "-1",
-            "hint": "NA"
-          },
-          "25": {
-            "red": "0",
-            "green": "0",
-            "blue": "187",
-            "alpha": "0",
-            "label": "0",
-            "hint": "draining stream or water body"
-          },
-          "26": {
             "red": "0",
             "green": "128",
-            "blue": "187",
-            "alpha": "0",
-            "label": "1",
-            "hint": "NA"
-          },
-          "45": {
-            "red": "0",
-            "green": "255",
-            "blue": "255",
-            "alpha": "0",
-            "label": "10",
-            "hint": "10 m (above draining stream)"
-          },
-          "75": {
-            "red": "255",
-            "green": "255",
-            "blue": "0",
-            "alpha": "0",
-            "label": "25",
-            "hint": "25 m"
-          },
-          "125": {
-            "red": "187",
-            "green": "128",
-            "blue": "0",
-            "alpha": "0",
-            "label": "50",
-            "hint": "50 m (above draining stream)"
-          },
-          "187": {
-            "red": "187",
-            "green": "40",
-            "blue": "0",
-            "alpha": "0",
-            "label": "75",
-            "hint": "200 m (above draining stream)"
-          },
-          "250": {
-            "red": "187",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": ">100",
-            "hint": "more than 100 m above draining stream"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dividehead",
-        "compid": "terrain_dividehead",
-        "setcolor": {
-          "0": {
-            "red": "255",
-            "green": "180",
-            "blue": "170",
-            "alpha": "0",
-            "label": "< -10",
-            "hint": "< -10 m above water divide"
-          },
-          "25": {
-            "red": "235",
-            "green": "200",
-            "blue": "10",
-            "alpha": "0",
-            "label": "0",
-            "hint": "Water divide"
-          },
-          "26": {
-            "red": "235",
-            "green": "235",
-            "blue": "20",
-            "alpha": "0",
-            "label": "1",
-            "hint": "NA"
-          },
-          "45": {
-            "red": "120",
-            "green": "235",
-            "blue": "120",
-            "alpha": "0",
-            "label": "10",
-            "hint": "10 m (below water divide)"
-          },
-          "75": {
-            "red": "0",
-            "green": "235",
-            "blue": "235",
-            "alpha": "0",
-            "label": "25",
-            "hint": "25 m (below water divide)"
-          },
-          "125": {
-            "red": "0",
-            "green": "128",
-            "blue": "240",
-            "alpha": "0",
-            "label": "50",
-            "hint": "50 m (below water divide)"
-          },
-          "187": {
-            "red": "0",
-            "green": "15",
-            "blue": "240",
-            "alpha": "0",
-            "label": "75",
-            "hint": "75m (below water divide)"
-          },
-          "250": {
-            "red": "0",
-            "green": "0",
-            "blue": "169",
-            "alpha": "0",
-            "label": ">100",
-            "hint": "more than 100 m below water divide"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "tci",
-        "compid": "terrain_tci",
-        "setcolor": {
-          "0": {
-            "red": "166",
-            "green": "37",
-            "blue": "39",
-            "alpha": "0",
-            "label": "0",
-            "hint": "TCI = 0"
-          },
-          "1": {
-            "red": "215",
-            "green": "50",
-            "blue": "45",
-            "alpha": "0",
-            "label": "0.2",
-            "hint": "NA"
-          },
-          "20": {
-            "red": "245",
-            "green": "173",
-            "blue": "96",
-            "alpha": "0",
-            "label": "5.0",
-            "hint": "TCI = 5"
-          },
-          "70": {
-            "red": "252",
-            "green": "224",
-            "blue": "144",
-            "alpha": "0",
-            "label": "10",
-            "hint": "TCI = 10"
-          },
-          "120": {
-            "red": "171",
-            "green": "217",
-            "blue": "171",
-            "alpha": "0",
-            "label": "15",
-            "hint": "TCI = 15"
-          },
-          "170": {
-            "red": "71",
-            "green": "117",
-            "blue": "220",
-            "alpha": "0",
-            "label": "20",
-            "hint": "TCI = 20"
-          },
-          "220": {
-            "red": "50",
-            "green": "75",
-            "blue": "170",
-            "alpha": "0",
-            "label": "25",
-            "hint": "TCI = 25"
-          },
-          "250": {
-            "red": "19",
-            "green": "24",
-            "blue": "120",
-            "alpha": "0",
-            "label": "> 28",
-            "hint": "TCI > 28"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "updrain",
-        "compid": "terrain_updrain",
-        "setcolor": {
-          "0": {
-            "red": "200",
-            "green": "37",
-            "blue": "39",
-            "alpha": "0",
-            "label": "0.01",
-            "hint": "0.01 km2"
-          },
-          "1": {
-            "red": "215",
-            "green": "50",
-            "blue": "45",
-            "alpha": "0",
-            "label": "1",
-            "hint": "NA"
-          },
-          "10": {
-            "red": "245",
-            "green": "173",
-            "blue": "96",
-            "alpha": "0",
-            "label": "0.02",
-            "hint": "NA"
-          },
-          "22": {
-            "red": "252",
-            "green": "245",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0.05",
-            "hint": "0.05 km2"
-          },
-          "50": {
-            "red": "171",
-            "green": "207",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0.5",
-            "hint": "0.5 km2"
-          },
-          "124": {
-            "red": "121",
-            "green": "167",
-            "blue": "170",
-            "alpha": "0",
-            "label": "250",
-            "hint": "250 km2"
-          },
-          "187": {
-            "red": "51",
-            "green": "117",
-            "blue": "220",
-            "alpha": "0",
-            "label": "50000",
-            "hint": "500000 km2"
-          },
-          "250": {
-            "red": "21",
-            "green": "34",
-            "blue": "170",
-            "alpha": "0",
-            "label": "> 9000000",
-            "hint": "> 9000000 km2"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "NA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "NA"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "spi",
-        "compid": "terrain_spi",
-        "setcolor": {
-          "0": {
-            "red": "180",
-            "green": "180",
-            "blue": "173",
-            "alpha": "0",
-            "label": "0",
-            "hint": "0"
-          },
-          "20": {
-            "red": "230",
-            "green": "230",
-            "blue": "173",
-            "alpha": "0",
-            "label": "3.0",
-            "hint": "SPI = 3"
-          },
-          "80": {
-            "red": "171",
-            "green": "217",
-            "blue": "255",
-            "alpha": "0",
-            "label": "50",
-            "hint": "SPI = 50"
-          },
-          "160": {
-            "red": "69",
-            "green": "117",
-            "blue": "180",
-            "alpha": "0",
-            "label": "3000",
-            "hint": "SPI = 3000"
-          },
-          "250": {
-            "red": "169",
-            "green": "54",
-            "blue": "149",
-            "alpha": "0",
-            "label": "> 250000",
-            "hint": "log (SPI) > 250000"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "ruslelfactor",
-        "compid": "terrain_ruslelfactor",
-        "setcolor": {
-          "0": {
-            "red": "75",
-            "green": "75",
-            "blue": "125",
-            "alpha": "0",
-            "label": "0",
-            "hint": "RUSLE L factor = 0"
-          },
-          "1": {
-            "red": "75",
-            "green": "116",
-            "blue": "67",
-            "alpha": "0",
-            "label": "0",
-            "hint": "NA"
-          },
-          "2": {
-            "red": "127",
-            "green": "207",
-            "blue": "120",
-            "alpha": "0",
-            "label": "0",
-            "hint": "NA"
-          },
-          "25": {
-            "red": "252",
-            "green": "245",
-            "blue": "120",
-            "alpha": "0",
-            "label": "1.0",
-            "hint": "RUSLE L factor = 1.0"
-          },
-          "125": {
-            "red": "252",
-            "green": "145",
-            "blue": "60",
-            "alpha": "0",
-            "label": "5.0",
-            "hint": "RUSLE L factor = 5.0"
-          },
-          "200": {
-            "red": "170",
-            "green": "70",
-            "blue": "23",
-            "alpha": "0",
-            "label": "8.0",
-            "hint": "RUSLE L factor = 8.0"
-          },
-          "249": {
-            "red": "161",
-            "green": "43",
-            "blue": "161",
-            "alpha": "0",
-            "label": "10",
-            "hint": "NA"
-          },
-          "250": {
-            "red": "161",
-            "green": "10",
-            "blue": "151",
-            "alpha": "0",
-            "label": "> 10",
-            "hint": "RUSLE L factor >= 10"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "slopelength",
-        "compid": "terrain_slopelength",
-        "setcolor": {
-          "0": {
-            "red": "128",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slopee"
-          },
-          "1": {
-            "red": "255",
-            "green": "128",
-            "blue": "0",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slopee"
-          },
-          "20": {
-            "red": "128",
-            "green": "255",
-            "blue": "128",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slope"
-          },
-          "125": {
-            "red": "0",
-            "green": "128",
-            "blue": "187",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slope"
-          },
-          "250": {
-            "red": "0",
-            "green": "0",
-            "blue": "128",
-            "alpha": "0",
-            "label": "flat",
-            "hint": "flat"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "ruslesfactor",
-        "compid": "terrain_ruslesfactor",
-        "setcolor": {
-          "0": {
-            "red": "64",
-            "green": "128",
-            "blue": "164",
-            "alpha": "0",
-            "label": "0",
-            "hint": "RUSLE S factor = 0"
-          },
-          "1": {
-            "red": "0",
-            "green": "187",
-            "blue": "128",
-            "alpha": "0",
-            "label": "1",
-            "hint": "NA"
-          },
-          "50": {
-            "red": "255",
-            "green": "255",
-            "blue": "0",
-            "alpha": "0",
-            "label": "1.0",
-            "hint": "RUSLE S factor = 1.0"
-          },
-          "150": {
-            "red": "255",
-            "green": "128",
-            "blue": "0",
-            "alpha": "0",
-            "label": "3.0",
-            "hint": "RUSLE S factor = 3.0"
-          },
-          "250": {
-            "red": "128",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "> 5.0",
-            "hint": "RUSLE S factor > 5.0"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "slopesteepness",
-        "compid": "terrain_slopesteepness",
-        "setcolor": {
-          "0": {
-            "red": "64",
-            "green": "128",
-            "blue": "164",
-            "alpha": "0",
-            "label": "slope",
-            "hint": "slope"
-          },
-          "1": {
-            "red": "0",
-            "green": "187",
             "blue": "128",
             "alpha": "0",
             "label": "slope",
@@ -2871,8 +738,8 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "green": "128",
             "blue": "255",
             "alpha": "0",
-            "label": "moderately concave",
-            "hint": "moderately concave"
+            "label": "Moderately concave",
+            "hint": "Moderately concave"
           },
           "125": {
             "red": "232",
@@ -2887,7 +754,7 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "green": "128",
             "blue": "0",
             "alpha": "0",
-            "label": "moderately convex",
+            "label": "Moderately convex",
             "hint": "Moderately convex"
           },
           "250": {
@@ -2895,8 +762,8 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "strongly convex",
-            "hint": "strongly convex"
+            "label": "Strongly convex",
+            "hint": "Strongly convex"
           },
           "251": {
             "red": "0",
@@ -2929,40 +796,40 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "green": "0",
             "blue": "128",
             "alpha": "0",
-            "label": "< -25",
-            "hint": "TPI <= -25"
+            "label": "TPI <= -125",
+            "hint": "TPI <= -125"
           },
-          "75": {
+          "62": {
             "red": "0",
             "green": "128",
             "blue": "255",
             "alpha": "0",
-            "label": "-10",
-            "hint": "TPI = -10"
+            "label": "TPI = -62",
+            "hint": "TPI = -62"
           },
           "125": {
             "red": "232",
             "green": "232",
             "blue": "232",
             "alpha": "0",
-            "label": "0",
+            "label": "TPI = 0",
             "hint": "TPI = 0"
           },
-          "175": {
+          "187": {
             "red": "255",
             "green": "128",
             "blue": "0",
             "alpha": "0",
-            "label": "10",
-            "hint": "TPI = 10"
+            "label": "TPI = 62",
+            "hint": "TPI = 62"
           },
           "250": {
             "red": "128",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "> 25",
-            "hint": "TPI >= 25"
+            "label": "TPI >= 125",
+            "hint": "TPI >= 125"
           },
           "251": {
             "red": "0",
@@ -2991,142 +858,44 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
         "compid": "dem_tri",
         "setcolor": {
           "0": {
-            "red": "44",
-            "green": "143",
-            "blue": "168",
+            "red": "10",
+            "green": "20",
+            "blue": "182",
             "alpha": "0",
-            "label": "0 (flat)",
+            "label": "flat",
             "hint": "flat"
           },
-          "5": {
-            "red": "30",
-            "green": "182",
-            "blue": "130",
+          "25": {
+            "red": "35",
+            "green": "128",
+            "blue": "150",
             "alpha": "0",
-            "label": "1",
-            "hint": "NA"
-          },
-          "50": {
-            "red": "190",
-            "green": "210",
-            "blue": "40",
-            "alpha": "0",
-            "label": "10",
-            "hint": "tri=10"
+            "label": "25",
+            "hint": "tri=25"
           },
           "100": {
             "red": "255",
             "green": "255",
-            "blue": "7",
+            "blue": "0",
             "alpha": "0",
-            "label": "20",
-            "hint": "tri=20"
+            "label": "87",
+            "hint": "tri=100"
           },
-          "150": {
-            "red": "250",
-            "green": "192",
-            "blue": "3",
-            "alpha": "0",
-            "label": "30",
-            "hint": "tri=30"
-          },
-          "200": {
-            "red": "243",
+          "175": {
+            "red": "255",
             "green": "128",
             "blue": "0",
             "alpha": "0",
-            "label": "40",
-            "hint": "tri=40"
+            "label": "175",
+            "hint": "tri=175"
           },
           "250": {
             "red": "145",
-            "green": "33",
-            "blue": "8",
-            "alpha": "0",
-            "label": ">=50",
-            "hint": "tri >=50"
-          },
-          "251": {
-            "red": "0",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "upland drainage",
-            "hint": "upland drainage"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "tri2",
-        "compid": "dem_tri2",
-        "setcolor": {
-          "0": {
-            "red": "44",
-            "green": "143",
-            "blue": "168",
-            "alpha": "0",
-            "label": "0 (flat)",
-            "hint": "flat"
-          },
-          "5": {
-            "red": "90",
-            "green": "182",
-            "blue": "130",
-            "alpha": "0",
-            "label": "1",
-            "hint": "NA"
-          },
-          "50": {
-            "red": "205",
-            "green": "210",
-            "blue": "105",
-            "alpha": "0",
-            "label": "10",
-            "hint": "tri=10"
-          },
-          "100": {
-            "red": "253",
-            "green": "253",
-            "blue": "155",
-            "alpha": "0",
-            "label": "20",
-            "hint": "tri=20"
-          },
-          "150": {
-            "red": "250",
-            "green": "206",
-            "blue": "73",
-            "alpha": "0",
-            "label": "30",
-            "hint": "tri=30"
-          },
-          "200": {
-            "red": "243",
-            "green": "164",
-            "blue": "80",
-            "alpha": "0",
-            "label": "40",
-            "hint": "tri=40"
-          },
-          "250": {
-            "red": "207",
-            "green": "91",
-            "blue": "68",
-            "alpha": "0",
-            "label": ">=50",
-            "hint": "tri >=50"
+            "label": ">=250",
+            "hint": "tri >=250"
           },
           "251": {
             "red": "0",
@@ -3351,8 +1120,58 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
       "processid": "AddRasterPalette",
       "overwrite": true,
       "parameters": {
-        "palette": "dem_darkest_fixed",
-        "compid": "dem_darkest_fixed",
+        "palette": "dem1",
+        "compid": "dem1_dem",
+        "setcolor": {
+          "0": {
+            "red": "54",
+            "green": "121",
+            "blue": "36",
+            "alpha": "0",
+            "label": "0",
+            "hint": "Sea level"
+          },
+          "125": {
+            "red": "247",
+            "green": "248",
+            "blue": "80",
+            "alpha": "0",
+            "label": "4000",
+            "hint": "4000 masl"
+          },
+          "250": {
+            "red": "121",
+            "green": "24",
+            "blue": "21",
+            "alpha": "0",
+            "label": "4000",
+            "hint": "4000 masl"
+          },
+          "251": {
+            "red": "0",
+            "green": "0",
+            "blue": "0",
+            "alpha": "0",
+            "label": "upland drainage",
+            "hint": "upland drainage"
+          },
+          "255": {
+            "red": "0",
+            "green": "0",
+            "blue": "0",
+            "alpha": "0",
+            "label": "upland drainage",
+            "hint": "upland drainage"
+          }
+        }
+      }
+    },
+    {
+      "processid": "AddRasterPalette",
+      "overwrite": true,
+      "parameters": {
+        "palette": "dem2",
+        "compid": "dem2_dem",
         "setcolor": {
           "0": {
             "red": "41",
@@ -3367,8 +1186,8 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "green": "121",
             "blue": "36",
             "alpha": "0",
-            "label": "800",
-            "hint": "800 masl"
+            "label": "0",
+            "hint": "Sea level"
           },
           "125": {
             "red": "247",
@@ -3383,148 +1202,32 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "green": "24",
             "blue": "21",
             "alpha": "0",
-            "label": "7200",
-            "hint": "7200 masl"
-          },
-          "250": {
-            "red": "250",
-            "green": "240",
-            "blue": "245",
-            "alpha": "0",
-            "label": ">= 8000",
-            "hint": ">= 8000 masl"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "No data",
-            "hint": "No data"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_dark_fixed",
-        "compid": "dem_dark_fixed",
-        "setcolor": {
-          "0": {
-            "red": "54",
-            "green": "121",
-            "blue": "36",
-            "alpha": "0",
-            "label": "0",
-            "hint": "Sea level"
-          },
-          "125": {
-            "red": "247",
-            "green": "248",
-            "blue": "80",
-            "alpha": "0",
             "label": "4000",
             "hint": "4000 masl"
           },
           "250": {
-            "red": "121",
-            "green": "24",
-            "blue": "21",
-            "alpha": "0",
-            "label": ">= 8000",
-            "hint": ">= 8000 masl"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "MA",
-            "hint": "MA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "No data",
-            "hint": "No data"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_darkest_auto",
-        "compid": "dem_darkest_auto",
-        "setcolor": {
-          "0": {
-            "red": "41",
-            "green": "96",
-            "blue": "58",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "25": {
-            "red": "54",
-            "green": "121",
-            "blue": "36",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "125": {
-            "red": "247",
-            "green": "248",
-            "blue": "80",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "225": {
-            "red": "121",
-            "green": "24",
-            "blue": "21",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "250": {
             "red": "250",
             "green": "240",
             "blue": "245",
             "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
+            "label": "4000",
+            "hint": "4000 masl"
           },
           "251": {
             "red": "0",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
+            "label": "upland drainage",
+            "hint": "upland drainage"
           },
           "255": {
             "red": "0",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "No data",
-            "hint": "NA"
+            "label": "upland drainage",
+            "hint": "upland drainage"
           }
         }
       }
@@ -3533,8 +1236,8 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
       "processid": "AddRasterPalette",
       "overwrite": true,
       "parameters": {
-        "palette": "dem_light_fixed",
-        "compid": "dem_light_fixed",
+        "palette": "dem3",
+        "compid": "dem3_dem",
         "setcolor": {
           "0": {
             "red": "90",
@@ -3543,120 +1246,54 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "alpha": "0",
             "label": "0",
             "hint": "Sea level"
-          },
-          "63": {
-            "red": "230",
-            "green": "219",
-            "blue": "165",
-            "alpha": "0",
-            "label": "2000",
-            "hint": "2000 masl"
-          },
-          "125": {
-            "red": "250",
-            "green": "200",
-            "blue": "110",
-            "alpha": "0",
-            "label": "4000",
-            "hint": "4000 masl"
-          },
-          "184": {
-            "red": "184",
-            "green": "157",
-            "blue": "139",
-            "alpha": "0",
-            "label": "6000",
-            "hint": "6000 masl"
-          },
-          "250": {
-            "red": "252",
-            "green": "249",
-            "blue": "245",
-            "alpha": "0",
-            "label": ">= 8000",
-            "hint": ">= 8000 masl"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "No data",
-            "hint": "No data"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_light_auto",
-        "compid": "dem_light_auto",
-        "setcolor": {
-          "0": {
-            "red": "90",
-            "green": "135",
-            "blue": "75",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
           },
           "62": {
             "red": "230",
             "green": "219",
             "blue": "165",
             "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
+            "label": "0",
+            "hint": "Sea level"
           },
           "125": {
             "red": "250",
             "green": "200",
             "blue": "110",
             "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
+            "label": "4000",
+            "hint": "4000 masl"
           },
           "183": {
             "red": "184",
             "green": "157",
             "blue": "139",
             "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
+            "label": "4000",
+            "hint": "4000 masl"
           },
           "250": {
             "red": "252",
             "green": "249",
             "blue": "245",
             "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
+            "label": "4000",
+            "hint": "4000 masl"
           },
           "251": {
             "red": "0",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
+            "label": "upland drainage",
+            "hint": "upland drainage"
           },
           "255": {
             "red": "0",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "No data",
-            "hint": "No data"
+            "label": "upland drainage",
+            "hint": "upland drainage"
           }
         }
       }
@@ -3665,8 +1302,8 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
       "processid": "AddRasterPalette",
       "overwrite": true,
       "parameters": {
-        "palette": "dem_lightest_fixed",
-        "compid": "dem_lightest_fixed",
+        "palette": "dem4",
+        "compid": "dem4_shade",
         "setcolor": {
           "0": {
             "red": "148",
@@ -3674,89 +1311,39 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "blue": "114",
             "alpha": "0",
             "label": "0",
-            "hint": "Sea level"
+            "hint": "Complete shade"
           },
           "125": {
             "red": "255",
             "green": "252",
             "blue": "207",
             "alpha": "0",
-            "label": "4000",
-            "hint": "4000 masl"
+            "label": "0",
+            "hint": "Complete shade"
           },
           "250": {
             "red": "244",
             "green": "158",
             "blue": "95",
             "alpha": "0",
-            "label": ">= 8000",
-            "hint": ">= 8000 masl"
+            "label": "250",
+            "hint": "complete light"
           },
           "251": {
             "red": "0",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
+            "label": "upland drainage",
+            "hint": "upland drainage"
           },
           "255": {
             "red": "0",
             "green": "0",
             "blue": "0",
             "alpha": "0",
-            "label": "No data",
-            "hint": "No data"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_lightest_auto",
-        "compid": "dem_lightest_auto",
-        "setcolor": {
-          "0": {
-            "red": "148",
-            "green": "188",
-            "blue": "114",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "125": {
-            "red": "255",
-            "green": "252",
-            "blue": "207",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "250": {
-            "red": "244",
-            "green": "158",
-            "blue": "95",
-            "alpha": "0",
-            "label": "auto",
-            "hint": "auto"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "No data",
-            "hint": "No data"
+            "label": "upland drainage",
+            "hint": "upland drainage"
           }
         }
       }
@@ -3887,200 +1474,6 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
       "processid": "AddRasterPalette",
       "overwrite": true,
       "parameters": {
-        "palette": "geomorphlegend",
-        "compid": "dem_geomorphlegend",
-        "setcolor": {
-          "5": {
-            "red": "220",
-            "green": "235",
-            "blue": "240",
-            "alpha": "0",
-            "label": "plain",
-            "hint": "NA"
-          },
-          "10": {
-            "red": "220",
-            "green": "235",
-            "blue": "240",
-            "alpha": "0",
-            "label": "plain",
-            "hint": "plain or flat"
-          },
-          "11": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak",
-            "hint": "NA"
-          },
-          "20": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak",
-            "hint": "peak or summit"
-          },
-          "21": {
-            "red": "255",
-            "green": "128",
-            "blue": "10",
-            "alpha": "0",
-            "label": "ridge",
-            "hint": "NA"
-          },
-          "30": {
-            "red": "255",
-            "green": "128",
-            "blue": "10",
-            "alpha": "0",
-            "label": "ridge",
-            "hint": "lodal ridge"
-          },
-          "31": {
-            "red": "235",
-            "green": "205",
-            "blue": "15",
-            "alpha": "0",
-            "label": "upper slope, shoulder",
-            "hint": "NA"
-          },
-          "40": {
-            "red": "235",
-            "green": "205",
-            "blue": "15",
-            "alpha": "0",
-            "label": "upper slope,shoulder",
-            "hint": "upper slope,shoulder"
-          },
-          "41": {
-            "red": "224",
-            "green": "80",
-            "blue": "80",
-            "alpha": "0",
-            "label": "spur",
-            "hint": "NA"
-          },
-          "50": {
-            "red": "224",
-            "green": "80",
-            "blue": "80",
-            "alpha": "0",
-            "label": "spur",
-            "hint": "spur"
-          },
-          "51": {
-            "red": "230",
-            "green": "230",
-            "blue": "120",
-            "alpha": "0",
-            "label": "open slope",
-            "hint": "NA"
-          },
-          "60": {
-            "red": "230",
-            "green": "230",
-            "blue": "120",
-            "alpha": "0",
-            "label": "open slope",
-            "hint": "open slope"
-          },
-          "61": {
-            "red": "25",
-            "green": "155",
-            "blue": "234",
-            "alpha": "0",
-            "label": "hollow",
-            "hint": "NA"
-          },
-          "70": {
-            "red": "25",
-            "green": "155",
-            "blue": "234",
-            "alpha": "0",
-            "label": "hollow",
-            "hint": "hollow"
-          },
-          "71": {
-            "red": "0",
-            "green": "128",
-            "blue": "128",
-            "alpha": "0",
-            "label": "U-shaped valley or footslope",
-            "hint": "NA"
-          },
-          "80": {
-            "red": "0",
-            "green": "128",
-            "blue": "128",
-            "alpha": "0",
-            "label": "U-shaped valley or footslope",
-            "hint": "U-shaped valley or footslope"
-          },
-          "81": {
-            "red": "10",
-            "green": "160",
-            "blue": "10",
-            "alpha": "0",
-            "label": "midslope/shallow valley, hollow",
-            "hint": "NA"
-          },
-          "90": {
-            "red": "10",
-            "green": "160",
-            "blue": "10",
-            "alpha": "0",
-            "label": "midslope/shallow valley, hollow",
-            "hint": "midslope/shallow valley, hollow"
-          },
-          "91": {
-            "red": "30",
-            "green": "0",
-            "blue": "170",
-            "alpha": "0",
-            "label": "Depression, canyon or valley",
-            "hint": "NA"
-          },
-          "100": {
-            "red": "30",
-            "green": "0",
-            "blue": "170",
-            "alpha": "0",
-            "label": "Depression, canyon or valley",
-            "hint": "Depression, canyon or valley"
-          },
-          "105": {
-            "red": "30",
-            "green": "0",
-            "blue": "170",
-            "alpha": "0",
-            "label": "Depression, canyon or valley",
-            "hint": "NA"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
-          }
-        }
-      }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
         "palette": "ps-morphology",
         "compid": "dem_ps-geomorphology",
         "setcolor": {
@@ -4091,6 +1484,22 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "alpha": "0",
             "label": "NA",
             "hint": "unused"
+          },
+          "1": {
+            "red": "220",
+            "green": "220",
+            "blue": "220",
+            "alpha": "0",
+            "label": "flat",
+            "hint": "flat"
+          },
+          "2": {
+            "red": "30",
+            "green": "8",
+            "blue": "60",
+            "alpha": "0",
+            "label": "depression/pit",
+            "hint": "depression/pit (2)"
           },
           "3": {
             "red": "0",
@@ -4124,22 +1533,6 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
             "label": "peak/summit",
             "hint": "peak/summit (6)"
           },
-          "10": {
-            "red": "220",
-            "green": "220",
-            "blue": "220",
-            "alpha": "0",
-            "label": "flat",
-            "hint": "flat"
-          },
-          "22": {
-            "red": "30",
-            "green": "8",
-            "blue": "60",
-            "alpha": "0",
-            "label": "depression/pit",
-            "hint": "depression/pit (2)"
-          },
           "250": {
             "red": "0",
             "green": "0",
@@ -4166,136 +1559,6 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
           }
         }
       }
-    },
-    {
-      "processid": "AddRasterPalette",
-      "overwrite": true,
-      "parameters": {
-        "palette": "ps-morphology-legend",
-        "compid": "dem_ps-geomorphology-legend",
-        "setcolor": {
-          "5": {
-            "red": "220",
-            "green": "235",
-            "blue": "240",
-            "alpha": "0",
-            "label": "plain",
-            "hint": "NA"
-          },
-          "10": {
-            "red": "220",
-            "green": "235",
-            "blue": "240",
-            "alpha": "0",
-            "label": "plain",
-            "hint": "plain or flat"
-          },
-          "11": {
-            "red": "30",
-            "green": "0",
-            "blue": "170",
-            "alpha": "0",
-            "label": "depression/pit",
-            "hint": "NA"
-          },
-          "20": {
-            "red": "30",
-            "green": "0",
-            "blue": "170",
-            "alpha": "0",
-            "label": "depression/pit",
-            "hint": "depression/pit (2)"
-          },
-          "21": {
-            "red": "0",
-            "green": "128",
-            "blue": "128",
-            "alpha": "0",
-            "label": "valley/channel",
-            "hint": "NA"
-          },
-          "30": {
-            "red": "0",
-            "green": "128",
-            "blue": "128",
-            "alpha": "0",
-            "label": "valley/channel",
-            "hint": "valley/chanel (3)"
-          },
-          "31": {
-            "red": "25",
-            "green": "155",
-            "blue": "234",
-            "alpha": "0",
-            "label": "hollow/pass",
-            "hint": "NA"
-          },
-          "40": {
-            "red": "25",
-            "green": "155",
-            "blue": "234",
-            "alpha": "0",
-            "label": "hollow/pass",
-            "hint": "hollow/pass (4)"
-          },
-          "41": {
-            "red": "255",
-            "green": "128",
-            "blue": "10",
-            "alpha": "0",
-            "label": "ridge/spur",
-            "hint": "NA"
-          },
-          "50": {
-            "red": "255",
-            "green": "128",
-            "blue": "10",
-            "alpha": "0",
-            "label": "ridge/spur",
-            "hint": "ridge/spur(5)"
-          },
-          "51": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak/summit",
-            "hint": "NA"
-          },
-          "60": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak/summit",
-            "hint": "peak/summit (6)"
-          },
-          "65": {
-            "red": "180",
-            "green": "20",
-            "blue": "10",
-            "alpha": "0",
-            "label": "peak/summit",
-            "hint": "NA"
-          },
-          "251": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
-          },
-          "255": {
-            "red": "0",
-            "green": "0",
-            "blue": "0",
-            "alpha": "0",
-            "label": "NA",
-            "hint": "NA"
-          }
-        }
-      }
     }
   ]
 }
@@ -4304,1412 +1567,12 @@ In contrast to the scaling, the _palette_ can be freely set for any map composit
 {% endcapture %}
 {% include widgets/toggle-code.html  toggle-text=text-capture  %}
 </div>
-
-#### CreateLegends
-
-```
-0003_createlegends_DEM_v090.json
-```
-
-Legend are defined using the process _CreateLegends_. While most entries can be set by their default values, a legend can also be complex to define.
-
-<button id= "togglecreatelegend" onclick="hiddencode('createlegenddiv')">Hide/Show 0003_createlegends_DEM_v090.json)</button>
-
-<div id="createlegenddiv" style="display:none">
-
-{% capture text-capture %}
-{% raw %}
-```
-{
-  "userproject": {
-    "userid": "karttur",
-    "projectid": "karttur",
-    "tractid": "karttur",
-    "siteid": "*",
-    "plotid": "*",
-    "system": "system"
-  },
-  "period": {
-    "timestep": "static"
-  },
-  "process": [
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Elevation (m.a.s.l)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "dem1": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "dem1",
-            "prefix": "dem1",
-            "suffix": "v01-90m"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Slope steepness (degrees)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "slope": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "slope",
-            "prefix": "slope",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Profile curvature",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "profc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "profc",
-            "prefix": "profc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Plan curvature",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "planc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "planc",
-            "prefix": "planc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Longitudinal curvature",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "longc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "longc",
-            "prefix": "longc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "cross-sectional curvature",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "profc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "crosc",
-            "prefix": "crosc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Topographic Ruggedness Index",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "tri3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Topographic Position Index",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "tpi3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tpi",
-            "prefix": "tpi",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Topographic Ruggedness Index",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "tri3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Landform (from TPI)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "lftpi": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "landform-tpi",
-            "prefix": "landform-tpi",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Landform (geomorphon)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "geomorph": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "geomorph",
-            "prefix": "geomorph",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "CreateLegend",
-      "overwrite": true,
-      "parameters": {
-        "columnhead": "Landform (curvature)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "landform-ps": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "landform-ps",
-            "prefix": "landform-ps",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Updrain area (km2)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "mfd-updrain": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "terrain",
-            "layerid": "mfd-updrain",
-            "prefix": "mfd-updrain",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Updrain area (km2)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "sfd-updrain": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "terrain",
-            "layerid": "sfd-updrain",
-            "prefix": "sfd-updrain",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Proximity (km)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "stream-dist": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "terrain",
-            "layerid": "stream-dist",
-            "prefix": "stream-dist",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Proximity (km)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "far-divide-dist": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "far-divide-dist",
-            "prefix": "far-divide-dist",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Proximity (km)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "near-divide-dist": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-dist",
-            "prefix": "near-divide-dist",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Hydraulic head (m)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "hydraulhead": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "hydraulhead",
-            "prefix": "hydraulhead",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Vertical head (m)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "near-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-head",
-            "prefix": "near-divide-head",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Vertical head (m)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "far-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "far-divide-head",
-            "prefix": "far-divide-head",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "StreamPoiwer Index (SPI)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "spi": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "spi",
-            "prefix": "spi",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "RUSLE L factor",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "terrain_rusle-slopelength": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "rusle-slopelength",
-            "prefix": "rusle-slopelength",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "RUSLE S factor",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "terrain_slopesteepness": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "rusle-slopesteepness",
-            "prefix": "rusle-slopesteepness",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "CreateLegend",
-      "overwrite": false,
-      "parameters": {
-        "columnhead": "Topographic Convergence Index (TCI)",
-        "precision": "0"
-      },
-      "srccomp": [
-        {
-          "terrain_tci": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "tci",
-            "prefix": "tci",
-            "suffix": "*"
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-{% endraw %}
-{% endcapture %}
-{% include widgets/toggle-code.html  toggle-text=text-capture  %}
-</div>
-
-#### ExportLegends
-
-```
-0005_exportlegend_DEM_v090.json
-```
-
-The process _ExportLegends_ export predefined legends for particular compositions and raster palettes.
-
-<button id= "toggleexportlegend" onclick="hiddencode('exportlegenddiv')">Hide/Show 0005_exportlegend_DEM_v090.json)</button>
-
-<div id="exportlegenddiv" style="display:none">
-
-{% capture text-capture %}
-{% raw %}
-
-```
-{
-  "userproject": {
-    "userid": "karttur",
-    "projectid": "karttur",
-    "tractid": "karttur",
-    "siteid": "*",
-    "plotid": "*",
-    "system": "system"
-  },
-  "period": {
-    "timestep": "static"
-  },
-  "process": [
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_darkest_fixed",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "dem": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "dem",
-            "prefix": "dem-darkest",
-            "suffix": "v01-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_dark_fixed",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "dem": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "dem",
-            "prefix": "dem-dark",
-            "suffix": "v01-90m"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_light_fixed",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "dem": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "dem",
-            "prefix": "dem-light",
-            "suffix": "v01-90m"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dem_lightest_fixed",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "dem": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "dem",
-            "prefix": "dem-lightest",
-            "suffix": "v01-90m"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "slope",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "slope": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "slope",
-            "prefix": "slope",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "slope2",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "slope": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "slope",
-            "prefix": "slope",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "slope3",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "slope": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "slope",
-            "prefix": "slope",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "demcurvature",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "profc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "profc",
-            "prefix": "profc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        },
-        {
-          "profc9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "profc",
-            "prefix": "profc",
-            "suffix": "v01-90m-grass-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "demcurvature",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "crosc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "crosc",
-            "prefix": "crosc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        },
-        {
-          "crosc9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "crosc",
-            "prefix": "crosc",
-            "suffix": "v01-90m-grass-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "demcurvature",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "planc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "planc",
-            "prefix": "planc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        },
-        {
-          "planc9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "planc",
-            "prefix": "planc",
-            "suffix": "v01-90m-grass-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "demcurvature",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "longc3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "longc",
-            "prefix": "longc",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        },
-        {
-          "longc9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "longc",
-            "prefix": "longc",
-            "suffix": "v01-90m-grass-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "tri",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "tri3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "v01-90m-3x3"
-          }
-        },
-        {
-          "tri9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "v01-90m-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "tri2",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "tri3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "v01-90m-3x3"
-          }
-        },
-        {
-          "tri9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "v01-90m-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "tpi",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "tpi3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tpi",
-            "prefix": "tpi",
-            "suffix": "v01-90m-3x3"
-          }
-        },
-        {
-          "tpi9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tpi",
-            "prefix": "tpi",
-            "suffix": "v01-90m-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "tri",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "tri3": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "v01-90m-3x3"
-          }
-        },
-        {
-          "tri9": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "tri",
-            "prefix": "tri",
-            "suffix": "v01-90m-9x9"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "landformTPIdouble",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "lftpi": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "landform-tpi",
-            "prefix": "landform-tpi",
-            "suffix": "v01-90m-np-stnd-1+3"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "landformTPI",
-        "legendnominal":false,
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "lftpi": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "landform-tpi",
-            "prefix": "landform-tpi",
-            "suffix": "v01-90m-np-stnd-1+3"
-          }
-        }
-      ]
-    },
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "geomorphlegend",
-        "legendnominal":false,
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "lftpi": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "geomorph",
-            "prefix": "geomorph",
-            "suffix": "v01-90m-grass-3x3"
-          }
-        }
-      ]
-    },
-
-
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "ps-morphology-legend",
-        "legendnominal":false,
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "landform-ps": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "dem",
-            "layerid": "landform-ps",
-            "prefix": "landform-ps",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-
-
-
-
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "updrain",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "mfd-updrain": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "terrain",
-            "layerid": "mfd-updrain",
-            "prefix": "mfd-updrain",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        },
-        {
-          "sfd-updrain": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "terrain",
-            "layerid": "sfd-updrain",
-            "prefix": "sfd-updrain",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "invgeneralproximity",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "stream-dist": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "terrain",
-            "layerid": "stream-dist",
-            "prefix": "stream-dist",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "streamproximity",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "stream-dist": {
-            "source": "ESA",
-            "product": "copdem",
-            "content": "terrain",
-            "layerid": "stream-dist",
-            "prefix": "stream-dist",
-            "suffix": "v01-pfpf-hydrdem4+4-90m"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "far-divide-dist",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "far-divide-dist": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "far-divide-dist",
-            "prefix": "far-divide-dist",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dividehead",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "far-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "far-divide-head",
-            "prefix": "far-divide-head",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "dividehead",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "near-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-head",
-            "prefix": "near-divide-head",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "hydraulhead",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "far-divide-head": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-head",
-            "prefix": "near-divide-head",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "near-divide-dist",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "near-divide-dist": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "near-divide-dist",
-            "prefix": "near-divide-dist",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "hydraulhead",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "hydraulhead": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "hydraulhead",
-            "prefix": "hydraulhead",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "ruslelfactor",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "terrain_rusle-slopelength": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "rusle-slopelength",
-            "prefix": "rusle-slopelength",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "ruslesfactor",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "terrain_rusle-slopesteepness": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "rusle-slopesteepness",
-            "prefix": "rusle-slopesteepness",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "tci",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "terrain_tci": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "tci",
-            "prefix": "tci",
-            "suffix": "*"
-          }
-        }
-      ]
-    },
-    {
-      "processid": "ExportLegend",
-      "overwrite": true,
-      "parameters": {
-        "palette": "spi",
-        "legendopacity": 128
-      },
-      "dstpath": {
-        "volume": "Karttur"
-      },
-      "srccomp": [
-        {
-          "terrain_spi": {
-            "source": "*",
-            "product": "*",
-            "content": "terrain",
-            "layerid": "spi",
-            "prefix": "spi",
-            "suffix": "*"
-          }
-        }
-      ]
-    }
-  ]
-}
-```
 
 ### Search and download
 
 Search and download differ for almost all datasets. Details for searching and downloading Copernicus DEM is in the post [Digital Elevation Models (DEMs)](../blog-global-DEMs/).
 
-#### SearchCopernicusProducts
+#### Search
 
 ```
 json/0100-SearchCopernicusProducts_CopDEM-90m.json
@@ -5762,7 +1625,7 @@ The search for the Copernicus DEM 90 m product is done using the special process
 {% include widgets/toggle-code.html  toggle-text=text-capture  %}
 </div>
 
-#### DownloadCopernicus
+#### Download
 
 ```
 json/0110_DownloadCopernicus_CopDEM-90m.json
@@ -5815,7 +1678,7 @@ Also downloading the Copernicus DEM 90 m version is defined with a customized pr
 {% include widgets/toggle-code.html  toggle-text=text-capture  %}
 </div>
 
-### UnZipRawData
+### Unzip
 
 ```
 json/0120_UnZipRawData_CopDEM-90m.json
@@ -5874,7 +1737,7 @@ Downloaded data that is retrieved as zip files can be unzipped with the command 
 {% include widgets/toggle-code.html toggle-text=text-capture  %}
 </div>
 
-### MosaicAncillary
+### Mosaic downloads
 
 ```
 json/0125_MosaicAncillary_CopDEM-90m.json
@@ -5907,8 +1770,8 @@ Downloaded data that are delivered as tiles (except for MODIS and Sentinel data 
       "overwrite": false,
       "parameters": {
         "mosaiccode": "subdirfiles",
-        "datadir": "/Volumes/Ancillary/RAWAUXILIARY/CODEM30",
-        "datafile": "COPDEM30_mosaic"
+        "datadir": "RAWAUXILIARY/CopernicusDem90/DEM",
+        "datafile": "CopernicusDem90_mosaic"
       },
       "srcpath": {
         "volume": "Ancillary",
@@ -5920,12 +1783,12 @@ Downloaded data that are delivered as tiles (except for MODIS and Sentinel data 
       },
       "dstcomp": [
         {
-          "copdem30": {
+          "copernicusdem90": {
             "source": "ESA",
-            "product": "copdem",
+            "product": "copernicusdem",
             "content": "dem",
-            "layerid": "copdem30",
-            "prefix": "dem",
+            "layerid": "copernicusdem90",
+            "prefix": "dem90",
             "suffix": "v01"
           }
         }
@@ -5939,7 +1802,7 @@ Downloaded data that are delivered as tiles (except for MODIS and Sentinel data 
 {% include widgets/toggle-code.html  toggle-text=text-capture  %}
 </div>
 
-### OrganizeAncillary
+### Organzie
 
 ```
 json/0160_OrganizeAncillary_CopDEM-90m.json
@@ -6030,7 +1893,7 @@ With the Copernicus data downloaded, unzipped and mosaicked, the data can be org
 {% include widgets/toggle-code.html  toggle-text=text-capture  %}
 </div>
 
-### TileAncillaryRegion
+### Tiling
 
 ```
 json/0180_TileAncillaryRegion_CopDem-90m.json
@@ -6106,13 +1969,13 @@ All basic processing in the Framework is done using predefined tiling systems. Y
 {% include widgets/toggle-code.html toggle-text=text-capture %}
 </div>
 
-### MosaicAdjacentTiles
+### Mosaic tiles
 
 ```
 0190_MosaicAdjacentTiles_CopDEM-90m
 ```
 
-Spatial processing tile by tile causes edge effects for kernel and regional based processes. To overcome that the Framework can use virtually expanded tiles as input in some processes. The process _MosaicAdjacentTiles_ creates the expanded virtual tiles. Note that the vritual datasets created using _MosaicAdjacentTiles_ depend on a rigid and unchanged file structure. Moving the datasets to another disk (volume) collapses the references to the orginal datasets.
+Spatial processing tile by tile causes edge effects for kernel and regional based processes. To overcome that the Framework can use virtually expanded tiles as input in some processes. The process _MosaicAdjacentTiles_ creates the expanded virtual tiles.
 
 <button id= "togglemosaictiles" onclick="hiddencode('mosaictilesdiv')">Hide/Show 0190_MosaicAdjacentTiles_CopDEM-90m</button>
 
@@ -6186,13 +2049,13 @@ Spatial processing tile by tile causes edge effects for kernel and regional base
 
 Hydrological corrections of the Copernicus DEM is done in several steps:
 
-- Filling/flattening of single pits/peaks adjacent to streams
+- Filling of single pits and peaks adjacent to streams
 - Adjacent tile mosaic the single cell corrected DEM
 - Filling of stream associated pits
 - Adjacent tile mosaic dual corrected DEM
 
 
-#### Filling/flattening of single pits/peaks adjacent to streams
+#### Filling of single pits and peaks adjacent to streams
 
 ```
 0230_GrassDemFillDirTiles_CopDEM_90m.json
@@ -6483,7 +2346,7 @@ The second hydrological correction is the filling up of larger pits in streams. 
 json/0192_MosaicAdjacentTiles_CopDEM-90m.json
 ```
 
-Create expanded virtual tiles of the corrected DEM tiles for use in the next step.
+Create expanded virtual tiles of the single cell corrected DEM tiles for use in the next step.
 
 <button id= "togglemosaic3" onclick="hiddencode('mosaic4')">Hide/Show Mosaic adjacent tiles (json)</button>
 
@@ -6867,7 +2730,7 @@ g.region raster=DEM --overwrite
 r.mapcalc "landDEM = if((DEM==0),null(),DEM)" --overwrite
 # Run statistics on landdem and capture the return with the variable "data"
 data="$(r.stats -p input=landDEM null_value='null')"
-# If the statistics includes null, the (expanded) tile includes a coastline
+# If the statistics incudes null, the (expanded) tile includes a coastline
 if echo "$data" | grep -q "null"; then
   echo "Coastline tile"
   # extract all cells at sea level
@@ -7364,10 +3227,6 @@ The Framework process for internal DEM derivates is focusing of calculating [Ter
 </div>
 
 #### GRASS DEM derivatives (_GrassOnetoManyTiles_)
-
-```
-0305_GrassOnetoManyTiles-DEM-derivates-3+9cell_CopDEM-90m.json
-```
 
 GRASS GIS has more options for retrieving DEM derivates than either GDAL or the internal Framework process. GRASS modules for retrieving DEM derivatives include: [r.slope.aspect](https://grass.osgeo.org/grass78/manuals/r.slope.aspect.html), [r.params.scale](https://grass.osgeo.org/grass78/manuals/r.param.scale.html), [r.tpi](https://grass.osgeo.org/grass78/manuals/addons/r.tpi.html), [r.tri](https://grass.osgeo.org/grass78/manuals/addons/r.tri.html) and [r.geomorphon](https://grass.osgeo.org/grass78/manuals/r.geomorphon).
 Retrieving DEM derivates using GRASS GIS though the Framework is done through the standard GRASS wrapper _GrassOnetoManyTiles_.

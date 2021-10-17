@@ -6,8 +6,8 @@ datasource: dem
 biophysical: geomorphology
 excerpt: "Virtual mosaics for avoiding edge effects from neighbourhood analysis in raster data"
 image: avg-trmm-3b43v7-precip_3B43_trmm_2001-2016_A
-date: '2021-03-15 T18:17:25.000Z'
-modified: '2021-03-15 T18:17:25.000Z'
+date: '2021-03-05 T18:17:25.000Z'
+modified: '2021-03-05 T18:17:25.000Z'
 comments: true
 share: true
 
