@@ -16,16 +16,12 @@
   url: /concept/
   include: 'N'
 
-- title: Python & DB
+- title: Prepare
   url: /prep/
   include: 'N'
 
-- title: Get project
+- title: Import
   url: /putinplace/
-  include: 'N'
-
-- title: Setup
-  url: /setup/
   include: 'N'
 
 - title: Develop

@@ -17,7 +17,6 @@ comments: true
 share: true
 ---
 
-
 ## Introduction
 
 Karttur's GeoImagine Framework is a system for processing Big Spatial Data. It is not easy to setup and learn, but once you have it running it is more versatile than other systems. This post links to all the steps required for setting up the Framework in MacOS.

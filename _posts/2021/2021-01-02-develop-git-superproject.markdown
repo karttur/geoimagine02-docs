@@ -3,12 +3,13 @@ layout: article
 title: git superproject and submodels
 categories: develop
 tutorial: null
-excerpt: "Create the git superproject wuth Kartturs GeoImagine Framework as submodules"
+excerpt: "Create the git superproject with Kartturs GeoImagine Framework packages as submodules"
 previousurl: null
 nexturl: null
 tags:
   - git
   - superproject
+  - submodules
 image: avg-trmm-3b43v7-precip_3B43_trmm_2001-2016_A
 date: '2021-01-02 T18:17:25.000Z'
 modified: '2021-01-02 T18:17:25.000Z'
@@ -23,7 +24,7 @@ figure2: eclipse_import_project_from_file_system_or_archive
 
 ## Introduction
 
-Karttur's GeoImagine Framework available at [Github](https://github.com/karttur) is built from a "superproject" (or container) repository with around 40 individual repositories attached as submodules. Each submodule (or repo) contains a customised Python package. Together all the submodules constitute the complete Framework. This post explains the git concept of submodules, and details how Karttur's GeoImagine Framework is organised online.
+Karttur's GeoImagine Framework available at [GitHub](https://github.com/karttur) is built from a "superproject" (or container) repository with around 40 individual repositories attached as submodules. Each submodule (or repo) contains a customised Python package. Together all the submodules constitute the complete Framework. This post explains the git concept of submodules, and details how Karttur's GeoImagine Framework is organised online.
 
 This post is a shorter summary of the post [git submodules](https://karttur.github.io/git-vcs/git/git-submodules/) under my blog on [git command line](https://karttur.github.io/git-vcs).
 
@@ -33,7 +34,7 @@ A superproject repo is like a container that links to other repos, or submodules
 
 ## Create superproject
 
-Create an ordinary repo, as outlined in my post on  [git cheat sheet](https://karttur.github.io/git-vcs/git/blog-github/). In this example I created a superproject repo for Kartturs GeoImagine Framework called _geoimagine02_framework_. In the <span class='app'>Terminal</span>, change directory <span class='terminalapp'>cd</span> to the empty superproject repo:
+Create an ordinary repo, as outlined in my post on  [git cheat sheet](https://karttur.github.io/git-vcs/git/blog-git-cheat-sheet/). In this example I created a superproject repo for Kartturs GeoImagine Framework called _geoimagine02_framework_. In the <span class='app'>Terminal</span>, change directory <span class='terminalapp'>cd</span> to the empty superproject repo:
 
 <span class='terminal'>$ cd geoimagine02_framework</span>
 
@@ -220,4 +221,4 @@ Your project should now be ready for deployment. Use the standard <span class='t
 
 ## Review the GitHub superproject repo
 
-If you return to your online git repo, e.g. at [HGitHub](https://github.com), you can inspect your superproject repo online. If all worked out, the project should be ready for cloning directly into <span class='app'>Eclipse</span> as described in the post [Git clone with Eclipse](../../prep/prepare-clone-eclipse/).
+If you return to your online git repo, e.g. at [GitHub](https://github.com), you can inspect your superproject repo online. If all worked out, the project should be ready for cloning directly into <span class='app'>Eclipse</span> as described in the post [Git clone with Eclipse](../../prep/prepare-clone-eclipse/).

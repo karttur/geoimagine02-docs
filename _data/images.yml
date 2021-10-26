@@ -1166,8 +1166,8 @@ trmm-3b43v7-precip-delta_3b43_trmm_1998-2017_slope@p-v7-f-A:
   source: null
 
 github-framework_karttur_01_openperspective:
-  file: github-framework_karttur_01_openperspective.jpg
-  source: github-framework_karttur_01_openperspective.jpg
+  file: github-framework_karttur_01_openperspective.png
+  source: github-framework_karttur_01_openperspective.png
   author: Thomas Gumbricht
   caption: Open Perspective in Eclipse
   credit: null
@@ -1189,35 +1189,115 @@ github-framework_karttur_03_Git-repo-alternatives:
   credit: null
   source: null
 
+github-framework_karttur_04_Source-Git-repo-keychain:
+  file: github-framework_karttur_04_Source-Git-repo-keychain.png
+  source: github-framework_karttur_04_Source-Git-repo-keychain.png
+  author: Thomas Gumbricht
+  caption: Allow Eclipse to access keychain.
+  credit: null
+  source: null
+
 github-framework_karttur_04_Source-Git-repo:
-  file: github-framework_karttur_04_Source-Git-repo.jpg
-  source: github-framework_karttur_04_Source-Git-repo.jpg
+  file: github-framework_karttur_04_Source-Git-repo.png
+  source: github-framework_karttur_04_Source-Git-repo.png
   author: Thomas Gumbricht
   caption: Select/define Source Git Repository in Eclipse.
   credit: null
   source: null
 
 github-framework_karttur_05_Git-branch-select:
-  file: github-framework_karttur_05_Git-branch-select.jpg
-  source: github-framework_karttur_05_Git-branch-select.jpg
+  file: github-framework_karttur_05_Git-branch-select.png
+  source: github-framework_karttur_05_Git-branch-select.png
   author: Thomas Gumbricht
   caption: Select repository branch in Eclipse.
   credit: null
   source: null
 
 github-framework_karttur_06_Git-local-dst:
-  file: github-framework_karttur_06_Git-local-dst.jpg
-  source: github-framework_karttur_06_Git-local-dst.jpg
+  file: github-framework_karttur_06_Git-local-dst.png
+  source: github-framework_karttur_06_Git-local-dst.png
   author: Thomas Gumbricht
   caption: Select Local Destination for GutHub repository clone in Eclipse.
   credit: null
   source: null
 
-github-framework_karttur_07_Git-repo-proj:
-  file: github-framework_karttur_07_Git-repo-proj.jpg
-  source: github-framework_karttur_07_Git-repo-proj.jpg
+github-framework_karttur_07_Git-repo-proj-submodules:
+  file: github-framework_karttur_07_Git-repo-proj-submodules.png
+  source: github-framework_karttur_07_Git-repo-proj-submodules.png
   author: Thomas Gumbricht
-  caption: Added Git Respositories in Eclipse.
+  caption: Added Git Respository with submodules in Eclipse.
+  credit: null
+  source: null
+
+github-framework_karttur_07_Git-repo-proj-workingtree:
+  file: github-framework_karttur_07_Git-repo-proj-workingtree.png
+  source: github-framework_karttur_07_Git-repo-proj-sworkingtree.png
+  author: Thomas Gumbricht
+  caption: Superproject working tree in Eclipse.
+  credit: null
+  source: null
+
+eclipse-python-interpreter-empty:
+  file: eclipse-python-interpreter-empty.png
+  source: eclipse-python-interpreter-empty.png
+  author: Thomas Gumbricht
+  caption: Dialogue window for selecting Python Interpreter in Eclipse.
+  credit: null
+  source: null
+
+eclipse-macos-path-to-pytho-interpreter:
+  file: eclipse-macos-path-to-pytho-interpreter.png
+  source: eclipse-macos-path-to-pytho-interpreter.png
+  author: Thomas Gumbricht
+  caption: Path to virtual python interpreter created in Anaconda.
+  credit: null
+  source: null
+
+eclipse-select-interpreter:
+  file: eclipse-select-interpreter.png
+  source: eclipse-select-interpreter.png
+  author: Thomas Gumbricht
+  caption: Select interpreter in Eclipse.
+  credit: null
+  source: null
+
+eclipse-interpreter-selection-needed:
+  file: eclipse-interpreter-selection-needed.png
+  source: eclipse-interpreter-selection-needed.png
+  author: Thomas Gumbricht
+  caption: Select installation for interpreter in Eclipse.
+  credit: null
+  source: null
+
+Eclipse-prefrences-interpreter-ready-to-install:
+  file: Eclipse-prefrences-interpreter-ready-to-install.png
+  source: Eclipse-prefrences-interpreter-ready-to-install.png
+  author: Thomas Gumbricht
+  caption: Preference window ready to install interpreter in Eclipse.
+  credit: null
+  source: null
+
+Eclipse-menu-perspective-other:
+  file: Eclipse-menu-perspective-other.png
+  source: Eclipse-menu-perspective-other.png
+  author: Thomas Gumbricht
+  caption: Change perspective for the Eclipse GUI.
+  credit: null
+  source: null
+
+Eclipse-empty-pydev-perspective:
+  file: Eclipse-empty-pydev-perspective.png
+  source: Eclipse-empty-pydev-perspective.png
+  author: Thomas Gumbricht
+  caption: Empty PyDev perspective in Eclipse.
+  credit: null
+  source: null
+
+Eclipse-pydev-proj-geoimagine03:
+  file: Eclipse-pydev-proj-geoimagine03.jpg
+  source: Eclipse-pydev-proj-geoimagine03.jpg
+  author: Thomas Gumbricht
+  caption: Add new PyDev project in Eclipse.
   credit: null
   source: null
 
